@@ -1,0 +1,8 @@
+---
+- name: Install Vsftpd
+  hosts: myservers
+  gather_facts: yes
+  become: 'yes'
+
+  roles:
+  - vsftpd

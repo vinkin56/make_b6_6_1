@@ -1,0 +1,4 @@
+---
+# defaults file for vsftpd
+user_name: vinkin
+user_password: ftppass123!

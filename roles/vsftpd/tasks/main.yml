@@ -1,0 +1,31 @@
+---
+# tasks file for vsftpd
+  - name: Copy key to remote hosts
+    copy:
+      src=~/.ssh/vinkin.pub
+      dest=/home/vinkin/.ssh/
+
+  - name: Install Vsftpd
+    yum:
+      name: vsftpd
+      state: present
+      tags: install
+
+  - name: Drop Vsftpd
+    yum:
+      name: vsftpd
+      state: absent
+      tags: drop
+
+  - name: Start Vsftpd
+    service:
+      name: vsftpd
+      state: started
+      enabled: yes
+
+  - name: Install configuration file
+    template:
+      src:   etc_vsftpd_vsftpd.conf.j2
+      dest: /etc/vsftpd.conf
+      mode: '0600'
+      notify: restart vsftpd
